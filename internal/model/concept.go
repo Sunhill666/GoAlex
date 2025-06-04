@@ -33,7 +33,7 @@ type DehydratedConcept struct {
 	DisplayName string `json:"display_name"`
 	ID          string `json:"id"`
 	Level       int    `json:"level"`
-	Wikipedia   string `json:"wikipedia"`
+	Wikidata    string `json:"wikidata"`
 }
 
 type DehydratedConceptWithScore struct {

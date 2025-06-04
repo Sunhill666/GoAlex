@@ -17,14 +17,14 @@ type Author struct {
 		Twitter   string `json:"twitter"`
 		Wikipedia string `json:"wikipedia"`
 	} `json:"ids"`
-	LastKnownInstitutions []DehydratedInstitution `json:"last_known_institutions"`
-	SummaryStats          SummaryStats            `json:"summary_stats"`
-	Topics                []TopicWithCount        `json:"topics"`
-	TopicShare            []TopicShare            `json:"topic_share"`
-	UpdatedDate           string                  `json:"updated_date"`
-	WorksAPIURL           string                  `json:"works_api_url"`
-	WorksCount            int                     `json:"works_count"`
-	XConcepts             []DehydratedConceptWithScore     `json:"x_concepts"`
+	LastKnownInstitutions []DehydratedInstitution      `json:"last_known_institutions"`
+	SummaryStats          SummaryStats                 `json:"summary_stats"`
+	Topics                []TopicWithCount             `json:"topics"`
+	TopicShare            []TopicShare                 `json:"topic_share"`
+	UpdatedDate           string                       `json:"updated_date"`
+	WorksAPIURL           string                       `json:"works_api_url"`
+	WorksCount            int                          `json:"works_count"`
+	XConcepts             []DehydratedConceptWithScore `json:"x_concepts"`
 }
 
 type DehydratedAuthor struct {

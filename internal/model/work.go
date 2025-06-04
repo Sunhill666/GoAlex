@@ -9,9 +9,9 @@ type Authorship struct {
 	Affiliations          []Affiliation           `json:"affiliations"`
 	Author                DehydratedAuthor        `json:"author"`
 	AuthorPosition        string                  `json:"author_position"`
-	Corresponding         bool                    `json:"is_corresponding"`
 	Countries             []string                `json:"countries"`
 	Institution           []DehydratedInstitution `json:"institutions"`
+	IsCorresponding       bool                    `json:"is_corresponding"`
 	RawAffiliationStrings []string                `json:"raw_affiliation_strings"`
 	RawAuthorName         string                  `json:"raw_author_name"`
 }
@@ -25,12 +25,12 @@ type IDs struct {
 }
 
 type Location struct {
-	Accepted       bool             `json:"is_accepted"`
+	IsAccepted     bool             `json:"is_accepted"`
+	IsOA           bool             `json:"is_oa"`
+	IsPublished    bool             `json:"is_published"`
 	LandingPageURL string           `json:"landing_page_url"`
 	License        string           `json:"license"`
-	OA             bool             `json:"is_oa"`
 	PDF_URL        string           `json:"pdf_url"`
-	Published      bool             `json:"is_published"`
 	Source         DehydratedSource `json:"source"`
 	Version        string           `json:"version"`
 }
@@ -40,17 +40,29 @@ type MeSH struct {
 	DescriptorName string `json:"descriptor_name"`
 	QualifierUI    string `json:"qualifier_ui"`
 	QualifierName  string `json:"qualifier_name"`
-	MajorTopic     bool   `json:"is_major_topic"`
+	IsMajorTopic   bool   `json:"is_major_topic"`
 }
 
+type OAStatus string
+
+const (
+	OAStatusClosed  OAStatus = "closed"
+	OAStatusBronze  OAStatus = "bronze"
+	OAStatusDiamond OAStatus = "diamond"
+	OAStatusGold    OAStatus = "gold"
+	OAStatusGreen   OAStatus = "green"
+	OAStatusHybrid  OAStatus = "hybrid"
+)
+
 type OpenAccess struct {
-	AnyRepositoryHasFulltext bool   `json:"any_repository_has_fulltext"`
-	OA                       bool   `json:"is_oa"`
-	OAStatus                 string `json:"oa_status"`
-	OAURL                    string `json:"oa_url"`
+	AnyRepoHasFulltext bool     `json:"any_repository_has_fulltext"`
+	IsOA               bool     `json:"is_oa"`
+	OAStatus           OAStatus `json:"oa_status"`
+	OAURL              string   `json:"oa_url"`
 }
 
 type Work struct {
+	Abstract              string           `json:"abstract"`
 	AbstractInvertedIndex map[string][]int `json:"abstract_inverted_index"`
 	Authorships           []Authorship     `json:"authorships"`
 	APCList               APC              `json:"apc_list"`
@@ -63,9 +75,9 @@ type Work struct {
 		LastPage  string `json:"last_page"`
 	} `json:"biblio"`
 	CitationNormalizedPercentile struct {
-		Value        float64 `json:"value"`
-		Top1Percent  bool    `json:"is_in_top_1_percent"`
-		Top10Percent bool    `json:"is_in_top_10_percent"`
+		IsTop1Percent  bool    `json:"is_in_top_1_percent"`
+		IsTop10Percent bool    `json:"is_in_top_10_percent"`
+		Value          float64 `json:"value"`
 	} `json:"citation_normalized_percentile"`
 	CitedByAPIURL               string                       `json:"cited_by_api_url"`
 	CitedByCount                int                          `json:"cited_by_count"`
@@ -80,7 +92,6 @@ type Work struct {
 	CreatedDate    string  `json:"created_date"`
 	DisplayName    string  `json:"display_name"`
 	DOI            string  `json:"doi"`
-	Fulltext       bool    `json:"has_fulltext"`
 	FulltextOrigin string  `json:"fulltext_origin"`
 	FWCI           float32 `json:"fwci"`
 	Grants         []struct {
@@ -88,10 +99,13 @@ type Work struct {
 		Funder            string `json:"funder"`
 		FunderDisplayName string `json:"funder_display_name"`
 	} `json:"grants"`
+	HasFulltext               bool                `json:"has_fulltext"`
 	ID                        string              `json:"id"`
 	IDs                       IDs                 `json:"ids"`
 	IndexedIn                 []string            `json:"indexed_in"`
 	InstitutionsDistinctCount int                 `json:"institutions_distinct_count"`
+	IsParatext                bool                `json:"is_paratext"`
+	IsRetracted               bool                `json:"is_retracted"`
 	Keywords                  []DehydratedKeyword `json:"keywords"`
 	Language                  string              `json:"language"`
 	License                   string              `json:"license"`
@@ -99,14 +113,12 @@ type Work struct {
 	LocationCount             int                 `json:"location_count"`
 	MeSH                      []MeSH              `json:"mesh"`
 	OpenAccess                OpenAccess          `json:"open_access"`
-	Paratext                  bool                `json:"is_paratext"`
 	PrimaryLocation           Location            `json:"primary_location"`
 	PrimaryTopic              TopicWithScore      `json:"primary_topic"`
 	PublicationDate           string              `json:"publication_date"`
 	PublicationYear           int                 `json:"publication_year"`
 	ReferenceWorks            []string            `json:"reference_works"`
 	RelatedWorks              []string            `json:"related_works"`
-	Retracted                 bool                `json:"is_retracted"`
 	SDGs                      []struct {
 		DisplayName string  `json:"display_name"`
 		ID          string  `json:"id"`

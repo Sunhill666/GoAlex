@@ -37,12 +37,12 @@ type Source struct {
 
 type DehydratedSource struct {
 	RepositorySource
-	Core                    bool     `json:"is_core"`
-	InDOAJ                  bool     `json:"is_in_doaj"`
-	ISSN                    []string `json:"issn"`
-	ISSNL                   string   `json:"issn_l"`
-	OA                      bool     `json:"is_oa"`
-	Type                    string   `json:"type"`
+	IsCore   bool     `json:"is_core"`
+	IsInDOAJ bool     `json:"is_in_doaj"`
+	IsOA     bool     `json:"is_oa"`
+	ISSN     []string `json:"issn"`
+	ISSNL    string   `json:"issn_l"`
+	Type     string   `json:"type"`
 }
 
 type RepositorySource struct {

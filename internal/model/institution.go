@@ -19,20 +19,20 @@ type Institution struct {
 		Wikidata  string `json:"wikidata"`
 	} `json:"ids"`
 	ImageThumbnailURL string `json:"image_thumbnail_url"`
-	SuperSystem       bool   `json:"is_super_system"`
 	ImageURL          string `json:"image_url"`
 	International     struct {
 		DisplayName map[string]string `json:"display_name"`
 	} `json:"international"`
-	Repositories []RepositorySource           `json:"repositories"`
-	Roles        []Role                       `json:"roles"`
-	SummaryStats SummaryStats                 `json:"summary_stats"`
-	Topics       []TopicWithCount             `json:"topics"`
-	TopicShare   []TopicShare                 `json:"topic_share"`
-	UpdatedDate  string                       `json:"updated_date"`
-	WorksAPIURL  string                       `json:"works_api_url"`
-	WorksCount   int                          `json:"works_count"`
-	XConcepts    []DehydratedConceptWithScore `json:"x_concepts"`
+	IsSuperSystem bool                         `json:"is_super_system"`
+	Repositories  []RepositorySource           `json:"repositories"`
+	Roles         []Role                       `json:"roles"`
+	SummaryStats  SummaryStats                 `json:"summary_stats"`
+	Topics        []TopicWithCount             `json:"topics"`
+	TopicShare    []TopicShare                 `json:"topic_share"`
+	UpdatedDate   string                       `json:"updated_date"`
+	WorksAPIURL   string                       `json:"works_api_url"`
+	WorksCount    int                          `json:"works_count"`
+	XConcepts     []DehydratedConceptWithScore `json:"x_concepts"`
 }
 
 type DehydratedInstitution struct {

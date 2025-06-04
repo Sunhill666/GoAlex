@@ -3,6 +3,7 @@ package core
 import (
 	"fmt"
 	"net/url"
+	"strings"
 )
 
 type PaginationParams struct {
@@ -27,6 +28,7 @@ func (p *PaginationParams) ToQuery() url.Values {
 
 type QueryParams struct {
 	Pagination *PaginationParams
+	Filter     map[string]any
 }
 
 func (q *QueryParams) ToQuery() url.Values {
@@ -37,6 +39,19 @@ func (q *QueryParams) ToQuery() url.Values {
 				query.Add(k, v)
 			}
 		}
+	}
+	if q.Filter != nil {
+		var sb strings.Builder
+		first := true
+		for k, v := range q.Filter {
+			if !first {
+				sb.WriteString(",")
+			}
+			escaped := strings.ReplaceAll(fmt.Sprint(v), "+", " ")
+			sb.WriteString(fmt.Sprintf("%s:%s", k, escaped))
+			first = false
+		}
+		query.Set("filter", sb.String())
 	}
 	return query
 }
